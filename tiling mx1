@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static int tiling(int n , int m ,int[] memo ){
+            if(n<0){
+                return 0 ;
+            }
+            
+            
+            if(memo[n] !=0){
+                return memo[n];
+            }
+            if(n==0){
+                memo[0]=1 ;
+                return 1 ;
+            }
+            if(m>n){
+                memo[n] = tiling(n-1,m, memo);
+                return memo[n];
+            }
+            
+           memo[n] = tiling(n-1,m, memo)+tiling(n-m,m,memo) ;
+            return memo[n];
+    }
+    public static void main(String[] args) throws Exception {
+            Scanner sc = new Scanner(System.in) ;
+            int  n = sc.nextInt() ;
+             int  m = sc.nextInt() ;
+            int [] memo =  new int [n+1] ;
+            System.out.println(tiling(n,m, memo));
+    }
+}
